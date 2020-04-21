@@ -1,0 +1,29 @@
+Queue Implementation:-
+I declared two integers front and rear. 
+
+Enqueue:- If queue is not full then queue[rear] is set to the given node and CurrentSize of array is increased by 1.
+
+Dequeue:-If queue is not empty then front element is returned and CurrentSize of array decreases by 1.
+
+Priority Queue Implemetation:-
+
+Enqueue:- Added the given node and increased the currentSize.
+
+Dequeue:- In order to remove the element with minimum priority i just found the index of minimum prioritiy element in array
+"queue" and also decreases the currentSize by 1 and shift all the elements from "minIndex to currentSize" by one position and 
+returned the element corresponding to minIndex.
+
+Seller:-
+public void sell() :-
+lock the "lock".Firstly check that catalog is full or not if it is full then wait and if not full then checks that inventory is empty or not if 
+not then enqueue the element from inventory to catalog and signal the buyer that now catalog has an element in it and finally
+unlock the lock.
+
+Buyer:-
+lock the "lock".Firstly check whether Catalog is empty, if empty then wait for seller to produce an element into catalog and if not empty then 
+conusme the element from catalog and signal the buyer that catalog may be empty now and finally unlock the lock.
+
+Assignment2Driver:-
+Firstly added all the elements from given arrayList to inventory queue.
+Then created multiple Buyer and seller threads and started them.Note that first buyer thread is started so that first time it waits as catalog is 
+empty because seller thread is not started yet.
