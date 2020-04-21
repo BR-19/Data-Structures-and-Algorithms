@@ -1,0 +1,172 @@
+DH Implementaion :-
+
+class DHnode :-
+
+It have a key and value ,so in assginemnt we have given student as object and a tuple of first and last name ,these two things are stored in key and value
+of this DHnode.
+ 
+class Hashtable:-
+
+This is the class which implements MyHashtable interface. In this i have maintained an array of type DHnode and its constructor simply initializes the value of size.
+In this i have following functions:-
+
+Insert :- This function returns the number of times the hashfunction is calculated.So here My algo is i am calculating the index by hashfunction and then checking whether 
+at that position the node is present or not. if it is not present then simply add it and if it present then go to other index by using (h=h+h2) in while loop so actually in
+ith loop i will be at (h=h+ih2) position. Also if a node is deleted then we can also insert at that position(for which i have used "temp" which is global).And increasae the count every time new hashfunction is calculated and return the count.
+
+Contains :-
+in this i have calculated the index by hashfunction then i am searching for that node by comparing concatination of first and last name of the given name to that of node's key
+present at that index, if i have found the key i return true and if not i increase the index by (h=h+hash2) till i reach a node which is null and not temp both.
+
+Delete:-
+in this first calculate the index by hashfunction and if that key exists in the array then we search for that key's node. So my while loop runs till i have found the key so i have will checl
+that my node at that index is not null and not temp ,then if the comparison of concatination of first and last name matches with the given key's concatination of first and last name then i set 
+that node to "temp" which is declared at the beginning (it is my way of saying that the node is deleted)and break from the loop.And increasae the count every time new hashfunction is calculated and return the count.
+
+update:-
+In this also i will search till the concatination of first and last name of node at calculated index matches with the concatination of first and last name of given key, if it matches then i update the data 
+corresponding to it and break the loop and if not then i increase my index by(h=(h+hash2)%tablesize).And increasae the count every time new hashfunction is calculated and return the count.
+
+get:-
+In this also i will calculate the index first and then check whether the node at that index is " not null or temp" if so then if that node is not temp then i simply check for concatination of names equality as above
+and if it matches then i return the node's value(i.e. Student database) else i incerase the index till the condition in while loop (mentioned above) is satisfied. and if not matches then return null.
+
+Address:-
+In this also i will calculate the index first and then check whether the node at that index is " not null or temp" if so then if that node is not temp then i simply check for concatination of names equality as above
+and if it matches then i reuturn the string representation of that index.else i increase the index till the condition in while loop (mentioned above) is satisfied. and if not matches then return "E".
+
+SCBST implementation:-
+
+class node:-
+It have a key and value and it maintains two nodes left and right for my bst implementation. It have various methods for setting and getting the key -value.
+It's constructor initializes the variables and set left and right node to null.So Each node have its left and right node which may be null or may note be.
+
+class scbst:-
+I have created an array of type nodes which is initialized by scbst constructor. In this we only use djb2 hashfunction to get index.
+It contaisn mehtods:-
+The node head in each method is the first node at that index and all the other nodes with same index our part of the tree with the head as root
+
+Here our key is tuple of first and last name but i am using only first name for different comparisons (as given in assignment recquirement).In special case when first name is same 
+i am using both.
+contains:-
+First generate the index by passing the concatination of first and last name.The node head is set to the node at that index and then we search in our bst for our key
+now if the concatination of first and last name matches with that of given key's concatination of first and last name then i simply return true.and if not then we have
+to search down the tree so there are two cases possible:-
+If first name is same and last name is different so we have to travel down the key by comparing the concatination of first and last name of both and if the the node n's key's concatination of 
+first and last name compared with that of key's comes out be greater than 0 then we go to right and if less than 0 then we go left in the tree.
+
+If first name is different then we travel down the key by comparing ONLY the first names.
+
+If the node is found we retrurn true else false.
+
+get:-
+
+in this first calculate index and then checks whether the key is present or not ,if not present then return null and if present then:-
+Search in the same manner as contains and if concatination of both of them matches then just return the value corresponding to that node.
+
+Insert:-
+
+In this also first calcuate the index and now here you maintain a parent also for your node. So we start searching down the tree to locate empty position. so till n!=null we run a loop and at each time beginning
+we set our parent(z) to node n, so here also we have two cases :-
+
+First name is same and different last name i.e. the first name of the name which we want to insert is matched with the first name of already inserted node then we would compare the concatination of both first and last name 
+to travel down the tree and also increase the count in each case (going right and going left)
+
+First name is different so we simply compare with the first names and increase the count in each case(going right and going left).
+
+if our z is null when the loop terminates then this means that we have to insert at that posititon so we set z to newNode else if the comparison of z's name with key's name comes out to be greater then 0 then means we have to insert
+new node at z.left(also increase the count) and else if it is less than 0 then insert at right and increase the count.
+
+Update:-
+
+This function's working is same as insert but here we need not to maintain parent.We simply search down the tree till n!=null(where n is head initially) and when the concatination of n's key's first and last name with given key's first and last name
+matches then we update the value corresponding to that node and increase the count and return the count.Here also two cases when searching:-
+
+First name is same and different last name then we compare the concatination of both first and last name 
+to travel down the tree and also increase the count in each case (going right and going left)
+
+First name is different so we simply compare with the first names and increase the count in each case(going right and going left).
+
+when n==null which means there is no name which matches with the given name then return count(which would be zero).
+
+Delete:-
+
+Here i am using recursion for deleting the given node as it is easier to deal with.
+So firstly in assignment3 file i have deal with the case in which the given key(i.e pair of first and last name) does not present in our array so that time if name is not present i simply print "E".And if present then do the following:-
+
+I have declared a global variable counter for returning the number of nodes touched.
+
+I have maintained two functions mainly:-
+
+Public int delete:-
+This function is called directly from assignment3 and whenever this is called counter is set to zero.
+This takes a key and finds the index corresponding to it and head is the node at that index then i called the recursive function "del" which delete the node then set the node at the index calculated to the node which we get from "del" function
+and returns the counter+1(Reason for "+1" is the function would always goes into recursion one time).
+
+public node del:-
+Here the base case is when head is null so i set counter to -1 as i am returning counter+1 in my delete function above and return head .
+Here also two cases our possible :-
+
+First name same and last name different:- In this we travel down the tree by comparing the concatination of both the first and last name and following the standard procedure i.e go left when compare(head node name and name given) gives greater then zero and go right 
+when less than zero and call recursively for go to next search and increse the counter.
+
+First name different:- Then just compare with their first names and do same.
+
+now After getting the node which we want to delete it have three cases :-
+1. Both child null then return null.
+2.one of the child null then increase the counter and return left child of head(if right is null) and return right child of head(if left is null).
+3. Both are not null then i am first getting  minimum node by "minv" function in the right side of your node and then just set key and value of your node to that of min node.
+and increase the counter.Then we need to delete the min node so it is deleted by recursive call.
+
+Address:-
+returns the index followed by left right steps taken to reach that node.  
+Here also two cases first name same and first name not same rest followed same like above cases.
+
+Other classes :-
+
+Pair:-
+It is a genric type class which implements comparable interface whose compareTo method i have overrident. It have two objects T and V type which is set to the values by its construtctor.
+As every java object have its toString() method , i have override its toString() method.
+
+student:-
+This class implements student interaface.
+
+assignment3 :-
+This is the main class which reads the input using BufferedReader and print corresponding outputs of query.
+In SCBST part:-
+In this part our key is tuple of first and last name.
+In insert query :- i have checked whether the key exist or not if it exist then print "E" and if not then insert it
+
+In update query:- i have checked whether the key exist or not if it exis then update it and print "E " in any other cases .
+
+In delete query:-i have checked if key exist or not if exist delete it and if not the pritn "E".
+
+In DH part :-
+The key is tuple of first and last name.
+Same as above .
+
+Time Complexity:-
+
+Seperate chaining :-
+
+When there is no collision then all the functions would take O(1) time and if the collision occurs then :-
+
+n=number of nodes
+x=load factor=(number of keys/capacity)
+
+Worst case time complexity for all the functions is O(n) and in average, binary search trees with n nodes have O(log n) height and here we are using hasing and BST.
+The average time complexity for all the functions is O(log(x)).
+
+Worst case :- Let suppose our BST have only left childs then in order to do insert,update,delete,get,contains any of them we have to travel down to bottom-most node
+which takes O(n) time.
+
+Double hashing:-
+
+In the case of no collision all the functions take O(1).
+In case of collisions all the functions takes O(1) average time (if load factor is suitable like less than 0.75).
+
+Note:- it is seen that if x is load factor then time complexity is O(1/1-x).
+
+Worst case :- O(n) :- If we have to Probe over all the n elements
+
+
